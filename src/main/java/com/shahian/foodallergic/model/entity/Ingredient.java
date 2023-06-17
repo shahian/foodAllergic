@@ -23,6 +23,6 @@ public class Ingredient {
         this.name=name;
     }
     public Ingredient() {
-        this.name=name;
+
     }
 }
