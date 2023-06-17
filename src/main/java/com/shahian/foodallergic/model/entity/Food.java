@@ -22,7 +22,7 @@ public class Food {
     public Food(){
 
     }
-    public Food(String foodname, List<Ingredient> ingredients) {
+    public Food(String foodName, List<Ingredient> ingredients) {
         this.foodName=foodName;
         this.ingredients=ingredients;
     }

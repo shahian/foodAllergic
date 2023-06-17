@@ -63,9 +63,12 @@ public class UserService {
 
         List<Ingredient> ingredients = ingredientRepository.findAll();
         for (Ingredient ingredient : ingredients) {
-            if (allergies.contains(ingredient.getName())) {
-                return true;
+            for (Allergy allergy:allergies){
+                if (allergy.getAllergyName().contains(ingredient.getName())) {
+                    return true;
+                }
             }
+
         }
         return false;
     }
@@ -79,14 +82,15 @@ public class UserService {
         User user = getUserById(userId);
         List<Food> substitutes = new ArrayList<>();
         List<Allergy> allergies = userAllergics(user.getId());
-        if (allergies.contains("Milk")) {
-            substitutes.add(new Food("Almond Milk", Arrays.asList(new Ingredient("Almond"), new Ingredient("Water"))));
-        }
-        if (allergies.contains("Eggs")) {
-            substitutes.add(new Food("Tofu", Arrays.asList(new Ingredient("Soybean"), new Ingredient("Water"))));
-        }
+        for(Allergy allergy: allergies ){
+                if (allergy.getAllergyName().contains("Milk")) {
+                    substitutes.add(new Food("Almond Milk", Arrays.asList(new Ingredient("Almond"), new Ingredient("Water"))));
+                }
+                if (allergy.getAllergyName().contains("Eggs")) {
+                    substitutes.add(new Food("Tofu", Arrays.asList(new Ingredient("Soybean"), new Ingredient("Water"))));
+                }
 
-
+            }
         return substitutes;
     }
 }
